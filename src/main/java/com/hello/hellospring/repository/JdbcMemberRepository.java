@@ -16,10 +16,17 @@ public class JdbcMemberRepository implements MemberRepository {
 
     /**
      * DB에 붙기 위해서는 DataSource가 필요하다.
-     * 스프링으로 부터 주입받아야 한다!
+     * DataSource 타입 객체는 스프링으로 부터 주입받아야 한다!
      */
     private final DataSource dataSource;
 
+    /**
+     * ★ 여기에 @Autowired를 붙이지 않아도 붙인것처럼 동작하는 이유?
+     * SpringConfig.class 에서 JdbcMemberRepository로 스프링 빈을 생성하기 때문에 스프링 빈으로 관리되고,
+     * 스프링 빈으로 관리되는 경우 생성자가 하나만 있으면 그 생성자에는 @Autowired가 붙어있지 않아도 붙은 것과 같이 동작한다.
+     *
+     * @param dataSource
+     */
     public JdbcMemberRepository(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -38,11 +45,13 @@ public class JdbcMemberRepository implements MemberRepository {
             pstmt.setString(1, member.getName());
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
+
             if (rs.next()) {
                 member.setId(rs.getLong(1));
             } else {
                 throw new SQLException("id 조회 실패");
             }
+
             return member;
         } catch (Exception e) {
             throw new IllegalStateException(e);
@@ -62,10 +71,12 @@ public class JdbcMemberRepository implements MemberRepository {
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, id);
             rs = pstmt.executeQuery();
+
             if (rs.next()) {
                 Member member = new Member();
                 member.setId(rs.getLong("id"));
                 member.setName(rs.getString("name"));
+
                 return Optional.of(member);
             } else {
                 return Optional.empty();
@@ -88,12 +99,14 @@ public class JdbcMemberRepository implements MemberRepository {
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
             List<Member> members = new ArrayList<>();
+
             while (rs.next()) {
                 Member member = new Member();
                 member.setId(rs.getLong("id"));
                 member.setName(rs.getString("name"));
                 members.add(member);
             }
+
             return members;
         } catch (Exception e) {
             throw new IllegalStateException(e);

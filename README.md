@@ -38,6 +38,10 @@ then : 이렇게 나와야 함. <br>
 일반적으로 @Service, @Repository는 @Configuration이 붙은 클래스에서 @Bean으로 많이 만든다.
 하지만, @Controller는 외부의 요청에 대해 처리하다보니 @Configuration 클래스 내부에서 @Bean으로 만들진 않음. <br>
 ※ 참고로 @Autowired는 스프링 빈 객체가 될 클래스에 있는 경우에만 동작함. !!!!
+   
+# ORM
+Object + Relational + Mapping <br>
+객체와 관계형 데이터베이스를 매핑하는 기술
 --- 
 # 단축키
 - Alt + Insert : 빠른 파일 / 메서드 생성
@@ -45,3 +49,5 @@ then : 이렇게 나와야 함. <br>
 - Ctrl + Alt + v : 변수 추출
 - Ctrl + Alt + m : 메서드 추출
 - Ctrl + Shift + t : 테스트 케이스 클래스 생성 
+- Ctrl + Shift + n : 파일 찾기 (파일명으로)
+- Ctrl + Shift + f : 파일 찾기 (내용으로)
