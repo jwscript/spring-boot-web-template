@@ -54,9 +54,16 @@ public class CompareTest {
                 new Student(50, "abc")
         );
 
-        // 이름 오름차순 정렬
+        // 이름 오름차순 정렬 - 1번째 방법
         students.stream()
-                .sorted(Comparator.comparing(Student::getName))
+                .sorted(Comparator.comparing(Student::getScore))
+                .forEach(student -> {
+                    System.out.println(student.toString());
+                });
+
+        // 이름 오름차순 정렬 - 2번째 방법
+        students.stream()
+                .sorted(Comparator.comparing((student) -> student.score))
                 .forEach(student -> {
                     System.out.println(student.toString());
                 });
