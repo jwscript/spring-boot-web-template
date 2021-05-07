@@ -49,7 +49,9 @@ public class CompareTest {
                 new Student(100, "abc"),
                 new Student(300, "aaa"),
                 new Student(400, "ccc"),
-                new Student(200, "bbb")
+                new Student(200, "bbb"),
+                new Student(500, "abc"),
+                new Student(50, "abc")
         );
 
         // 이름 오름차순 정렬
@@ -62,6 +64,14 @@ public class CompareTest {
         // 점수 내림차순 정렬
         students.stream()
                 .sorted(Comparator.comparing(Student::getScore).reversed())
+                .forEach(student -> {
+                    System.out.println(student.toString());
+                });
+
+        // 이름 오름차순 정렬 후, 점수 오름차순 정렬
+        students.stream()
+                .sorted(Comparator.comparing(Student::getName)
+                        .thenComparing(Student::getScore))
                 .forEach(student -> {
                     System.out.println(student.toString());
                 });
