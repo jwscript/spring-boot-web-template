@@ -5,7 +5,7 @@
  * filter는 기존 데이터를 그대로 유지한채 조건에 부합하는 것을 포함하면 그대로 전달하는 느낌.
  * map은 기존 데이터 덩어리에서 필요한 데이터를 뽑아내는 느낌.
  */
-package com.hello.hellospring.study.compare;
+package com.hello.hellospring.study.streamquiz;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
