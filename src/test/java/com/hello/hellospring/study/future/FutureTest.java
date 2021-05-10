@@ -1,8 +1,6 @@
-/**
- * TODO: submit 메서드 이후에 print 되는 순서에 대한 결과가 Future와 CompletableFuture의 차이인지?
- */
 package com.hello.hellospring.study.future;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +40,7 @@ public class FutureTest {
          */
         Integer result = future.get();
         System.out.println(LocalTime.now() + " [3] Result : " + result);
+        Assertions.assertThat(result).isEqualTo(2);
     }
 
     @Test
@@ -55,16 +54,18 @@ public class FutureTest {
          * ★ Callable 구현체를 submit으로 전달하면 대기중인 Thread가 실행된다.
          */
         Executors.newCachedThreadPool().submit(() -> {
-            System.out.println(LocalTime.now() + " [2] Doing something");
+            System.out.println(LocalTime.now() + " [1] Doing something");
             int sum = 2;
             Thread.sleep(3000);
             future.complete(sum); // Future의 complete(data) 메서드로 다른 쓰레드로 전달할 데이터를 저장한다.
             return null;
         });
 
-        System.out.println(LocalTime.now() + " [1] Waiting the task done");
+        System.out.println(LocalTime.now() + " [2] Waiting the task done");
         Integer result = future.get(); // Future 객체에 값이 들어오면(set) future.get() 메서드가 그 값을 가져온다.
         System.out.println(LocalTime.now() + " [3] Result : " + result);
+
+        Assertions.assertThat(result).isEqualTo(2);
     }
 
     @Test
