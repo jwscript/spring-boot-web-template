@@ -1,3 +1,3 @@
 $(document).ready(function () {
-    alert("home alert");
+    alert("import home.js success");
 });
