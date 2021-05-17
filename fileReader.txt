@@ -1,0 +1,4 @@
+Hello;
+This is sample data;
+for FileReaderTest.java;
+By ~~;

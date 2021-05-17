@@ -185,25 +185,46 @@ public class KakaoTest {
             Item item1 = (Item) o1;
             Item item2 = (Item) o2;
 
+            String name1 = item1.getName();
+            String name2 = item2.getName();
+
+            int relevance1 = item1.getRelevance();
+            int relevance2 = item2.getRelevance();
+
+            int price1 = item1.getPrice();
+            int price2 = item2.getPrice();
+
+            int result = 0;
+
             if (orderBy == 0) {
                 if (orderDirection == 0) {
-                    return item1.getName().compareTo(item2.getName());
+                    return name1.compareTo(name2);
                 } else {
-                    return item2.getName().compareTo(item1.getName());
+                    return name2.compareTo(name1);
                 }
             } else if (orderBy == 1) {
                 if (orderDirection == 0) {
-                    return ((Integer) item1.getRelevance()).compareTo((Integer) item2.getRelevance());
+                    if (relevance1 > relevance2) result = 1;
+                    else if (relevance1 == relevance2) result = 0;
+                    else if (relevance1 < relevance2) result = -1;
                 } else {
-                    return ((Integer) item2.getRelevance()).compareTo((Integer) item1.getRelevance());
+                    if (relevance1 > relevance2) result = -1;
+                    else if (relevance1 == relevance2) result = 0;
+                    else if (relevance1 < relevance2) result = 1;
                 }
-            } else {
+            } else if (orderBy == 2) {
                 if (orderDirection == 0) {
-                    return ((Integer) item1.getPrice()).compareTo((Integer) item2.getPrice());
+                    if (price1 > price2) result = 1;
+                    else if (price1 == price2) result = 0;
+                    else if (price1 < price2) result = -1;
                 } else {
-                    return ((Integer) item2.getPrice()).compareTo((Integer) item1.getPrice());
+                    if (price1 > price2) result = -1;
+                    else if (price1 == price2) result = 0;
+                    else if (price1 < price2) result = 1;
                 }
             }
+
+            return result;
         }
     }
 }
