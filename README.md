@@ -51,3 +51,4 @@ Object + Relational + Mapping <br>
 - Ctrl + Shift + t : 테스트 케이스 클래스 생성 
 - Ctrl + Shift + n : 파일 찾기 (파일명으로)
 - Ctrl + Shift + f : 파일 찾기 (내용으로)
+- Ctrl + F12 : 현재 클래스의 메서드/필드 열람
