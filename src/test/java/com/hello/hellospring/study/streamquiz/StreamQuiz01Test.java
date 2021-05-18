@@ -111,6 +111,14 @@ public class StreamQuiz01Test {
                 .reduce(Integer::max);
 
         System.out.println("biggestValue = " + biggestValue);
+
+        // map을 통해 반환하게 될 값의 타입을 정확하게 명시.
+        int biggestValue2 = transactions.stream()
+                .mapToInt(Transaction::getValue)
+                .reduce(Integer::max)
+                .getAsInt();
+
+        System.out.println("biggestValue2 = " + biggestValue2);
     }
 
     @Test
