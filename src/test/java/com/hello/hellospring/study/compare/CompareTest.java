@@ -9,9 +9,7 @@ package com.hello.hellospring.study.compare;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class CompareTest {
     @Test
@@ -46,13 +44,22 @@ public class CompareTest {
     @DisplayName("Stream의 sort에서의 comparing 구현 및 동작 확인")
     void comparingTest() {
         List<Student> students = Arrays.asList(
-                new Student(100, "abc"),
+                new Student(100, "abd"),
+                new Student(700, "ddd"),
+                new Student(400, "abc"),
+                new Student(200, "ccc"),
+                new Student(800, "bbb"),
+                new Student(600, "cba"),
                 new Student(300, "aaa"),
-                new Student(400, "ccc"),
-                new Student(200, "bbb"),
-                new Student(500, "abc"),
-                new Student(50, "abc")
+                new Student(500, "eee")
         );
+
+        // 이름 오름차순 정렬 - 0번째 방법 (커스텀 Comparator 사용)
+        students.stream()
+                .sorted(new NameAscending())
+                .forEach(student -> {
+                    System.out.println(student.toString());
+                });
 
         // 이름 오름차순 정렬 - 1번째 방법
         students.stream()
